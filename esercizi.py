@@ -1,3 +1,46 @@
+"""
+Esercizi di laboratorio di informatica
+Autore: Anna Grazia
+
+dumps → stringa
+dump  → file
+loads → da stringa
+load  → da file
+
+dumps  → da Python → stringa JSON
+loads  → da stringa JSON → Python
+
+dump   → da Python → file JSON
+load   → da file JSON → Python
+
+Python → file       dump()
+file   → Python     load()
+
+Python → stringa    dumps()
+stringa → Python    loads()
+
+P.S. attenzione alla "grandine didattica"
+
+"""
+
+
+import json
+
+persona = {
+    "nome": "Anna",
+    "eta": 55,
+    "residenza": "FI"
+}
+
+testo_json = json.dumps(persona)
+
+print(testo_json)
+
+persona = json.loads(testo_json)
+print(persona)
+print(type(persona))
+
+
 # # # for: percorre gli elementi di una sequenza
 
 # # numeri = [3, 7, 2, 9]
@@ -53,33 +96,33 @@
 # for valore in persona.values():
 #     print(valore) # stampa tutti i valori del dizionario    
 
-id_persona = 0
-elenco_persone = {}
+#id_persona = 0
+#elenco_persone = {}
 
-while True:
-    risposta = input("Vuoi inserire una nuova persona? (s/n): ")
-    if risposta.lower() == "n":
-        break
-    else:
-        id_persona += 1
+#while True:
+#     risposta = input("Vuoi inserire una nuova persona? (s/n): ")
+#     if risposta.lower() == "n":
+#         break
+#     else:
+#         id_persona += 1
         
-        nome = input("Inserisci il nome: ")
-        eta = input("Inserisci l'età: ")
-        residenza = input("Inserisci la residenza: ")
-        professione = input("Inserisci la professione: ")
+#         nome = input("Inserisci il nome: ")
+#         eta = input("Inserisci l'età: ")
+#         residenza = input("Inserisci la residenza: ")
+#         professione = input("Inserisci la professione: ")
 
-        persona = {
-        "nome": nome,
-        "eta": eta,
-        "residenza": residenza,
-        "professione": professione
-        }
-        elenco_persone[id_persona]  = persona
+#         persona = {
+#         "nome": nome,
+#         "eta": eta,
+#         "residenza": residenza,
+#         "professione": professione
+#         }
+#         elenco_persone[id_persona]  = persona
 
-for id_persona, persona in elenco_persone.items():
-    print(f"\nInformazioni sulla persona con ID {id_persona}:")
-    for chiave, valore in persona.items():
-        print(f"{chiave}: {valore}")
+# for id_persona, persona in elenco_persone.items():
+#     print(f"\nInformazioni sulla persona con ID {id_persona}:")
+#     for chiave, valore in persona.items():
+#         print(f"{chiave}: {valore}")
 
 # elenco_persona = {
 #     "nome": ["Anna", "Luca", "Marco"],
