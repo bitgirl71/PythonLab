@@ -23,7 +23,7 @@ def check_risposta(risposta):
 
 def salva_elenco_persone(elenco_persone, nome_file):
     with open(nome_file, 'w') as file:
-        json.dump(elenco_persone, file)
+        json.dump(elenco_persone, file, indent=4)
 
 def carica_elenco_persone(nome_file):
     try:
@@ -40,6 +40,18 @@ def converti_id_persona_a_intero(elenco_persone):
         elenco_convertito[int(id_persona)] = persona
     return elenco_convertito
 
+def valida_dato(stringa):
+    if stringa != "":
+        return stringa, "", True
+    else:
+        return "", "Il campo non può essere vuoto.", False  
+
+def valida_intero(stringa):
+    try:
+        numero = int(stringa)
+        return numero, "", True
+    except ValueError:
+        return "", "Inserisci un numero valido.", False      
 
 def main():
     #elenco_persone = {}
