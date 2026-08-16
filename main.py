@@ -53,6 +53,30 @@ def valida_intero(stringa):
     except ValueError:
         return "", "Inserisci un numero valido.", False      
 
+def chiedi_dato(messaggio):
+    while True:
+        dato = input(messaggio)
+        dato, messaggio_errore, valida = valida_dato(dato)
+        if valida:
+            return dato
+        else:
+            print(messaggio_errore)
+
+def chiedi_intero(messaggio):
+    while True:
+        dato = input(messaggio)
+
+        dato, messaggio_errore, valida = valida_dato(dato)
+        if not valida:
+            print(messaggio_errore)
+            continue
+        
+        numero, messaggio_errore, valida = valida_intero(dato)
+        if valida:
+            return numero
+        else:
+            print(messaggio_errore)          
+            
 def main():
     #elenco_persone = {}
     elenco_persone = carica_elenco_persone("elenco_persone.json")
@@ -75,14 +99,13 @@ def main():
         # se la risposta è valida e l'utente ha scelto di non inserire una nuova persona, esco dal ciclo
         elif not scelta:
             break
+        
+        nome = chiedi_dato("Inserisci il nome: ")
+        eta = chiedi_intero("Inserisci l'età: ")
+        residenza = chiedi_dato("Inserisci la residenza: ")
+        professione = chiedi_dato("Inserisci la professione: ")
 
         id_persona += 1
-        
-        nome = input("Inserisci il nome: ")
-        eta = input("Inserisci l'età: ")
-        residenza = input("Inserisci la residenza: ")
-        professione = input("Inserisci la professione: ")
-
         persona = crea_persona(nome, eta, residenza, professione)
         aggiungi_persona(elenco_persone, id_persona, persona)
 
