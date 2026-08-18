@@ -76,7 +76,14 @@ def chiedi_intero(messaggio):
             return numero
         else:
             print(messaggio_errore)          
-            
+
+def trova_persona(elenco_persone, nome):
+
+    for persona in elenco_persone.values():
+        if persona["nome"].lower() == nome.lower():
+            return persona
+    return None
+
 def main():
     #elenco_persone = {}
     elenco_persone = carica_elenco_persone("elenco_persone.json")
@@ -98,7 +105,20 @@ def main():
             continue
         # se la risposta è valida e l'utente ha scelto di non inserire una nuova persona, esco dal ciclo
         elif not scelta:
-            break
+            trova = input("Vuoi cercare una persona per nome? (s/n): ")
+            if trova.strip().upper() == "S":
+                nome_cercato = input("Inserisci il nome della persona da cercare: ")
+                persona_trovata = trova_persona(elenco_persone, nome_cercato)
+                if persona_trovata:
+                    print(f"\nInformazioni sulla persona trovata:")
+                    for chiave, valore in persona_trovata.items():
+                        print(f"{chiave}: {valore}")
+                else:
+                    print("Persona non trovata.")
+                continue
+            else:
+                print(messaggio)
+                break
         
         nome = chiedi_dato("Inserisci il nome: ")
         eta = chiedi_intero("Inserisci l'età: ")
@@ -111,10 +131,10 @@ def main():
 
     salva_elenco_persone(elenco_persone, "elenco_persone.json")
       
-    for id_persona, persona in elenco_persone.items():
-        print(f"\nInformazioni sulla persona con ID {id_persona}:")
-        for chiave, valore in persona.items():
-            print(f"{chiave}: {valore}")
+    # for id_persona, persona in elenco_persone.items():
+    #     print(f"\nInformazioni sulla persona con ID {id_persona}:")
+    #     for chiave, valore in persona.items():
+    #         print(f"{chiave}: {valore}")
 
 
 
