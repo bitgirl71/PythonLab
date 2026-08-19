@@ -84,6 +84,20 @@ def trova_persona(elenco_persone, nome):
             return persona
     return None
 
+def normalizza_eta(elenco_persone):
+    elenco_convertito = {}
+
+    for id_persona, persona in elenco_persone.items():
+
+        persona_convertita = persona.copy()
+        eta = persona_convertita["eta"]
+
+        if isinstance(eta, str):
+            persona_convertita["eta"] = int(eta)
+
+        elenco_convertito[id_persona] = persona_convertita
+    return elenco_convertito
+
 def main():
     #elenco_persone = {}
     elenco_persone = carica_elenco_persone("elenco_persone.json")
