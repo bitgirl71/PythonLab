@@ -11,6 +11,8 @@ def crea_persona(nome, eta, residenza, professione):
 def aggiungi_persona(elenco_persone, id_persona, persona):
     elenco_persone[id_persona] = persona
 
+#def cerca_persona():
+
 def check_risposta(risposta):
     risposta = risposta.strip().upper()
        
@@ -97,6 +99,23 @@ def normalizza_eta(elenco_persone):
 
         elenco_convertito[id_persona] = persona_convertita
     return elenco_convertito
+def menu():
+    print("+----------------------------------+")
+    print("|            PYTHONLAB             |")
+    print("+----------------------------------+")
+    print("| 1. Inserimento                   |")
+    print("| 2. Visualizzazione               |")
+    print("| 3. Modifica                      |")
+    print("| 4. Esci                          |")
+    print("+----------------------------------+")
+
+    scelta = input("Scegli: ")
+    try:
+        scelta = int(scelta)
+        return scelta
+    except ValueError:
+        print("Non sai nemmeno contare?!")
+ 
 
 def main():
     #elenco_persone = {}
@@ -106,51 +125,123 @@ def main():
         id_persona = max(elenco_persone.keys())
     else:
         id_persona = 0
-    
-    while True:
-        domanda = "Vuoi inserire una nuova persona? (s/n): "
-        risposta = input(domanda)
 
-        scelta, messaggio, valida = check_risposta(risposta)
+    opzione = menu()
 
-        # se la risposta non è valida, stampo il messaggio di errore e continuo il ciclo
-        if not valida:
-            print(messaggio)
-            continue
-        # se la risposta è valida e l'utente ha scelto di non inserire una nuova persona, esco dal ciclo
-        elif not scelta:
-            trova = input("Vuoi cercare una persona per nome? (s/n): ")
-            if trova.strip().upper() == "S":
-                nome_cercato = input("Inserisci il nome della persona da cercare: ")
-                persona_trovata = trova_persona(elenco_persone, nome_cercato)
-                if persona_trovata:
-                    print(f"\nInformazioni sulla persona trovata:")
-                    for chiave, valore in persona_trovata.items():
-                        print(f"{chiave}: {valore}")
-                else:
-                    print("Persona non trovata.")
-                continue
-            else:
-                print(messaggio)
-                break
-        
+    if opzione == 1:
+
         nome = chiedi_dato("Inserisci il nome: ")
         eta = chiedi_intero("Inserisci l'età: ")
         residenza = chiedi_dato("Inserisci la residenza: ")
         professione = chiedi_dato("Inserisci la professione: ")
-
+        
         id_persona += 1
         persona = crea_persona(nome, eta, residenza, professione)
         aggiungi_persona(elenco_persone, id_persona, persona)
+        
+        salva_elenco_persone(elenco_persone, "elenco_persone.json")
+      
+        for id_persona, persona in elenco_persone.items():
+            print(f"\nInformazioni sulla persona con ID {id_persona}:")
+            for chiave, valore in persona.items():
+                print(f"{chiave}: {valore}")
 
-    salva_elenco_persone(elenco_persone, "elenco_persone.json")
+    elif opzione == 2:
+        while True:
+
+            trova = input("Vuoi cercare una persona per nome? (s/n): ")
+
+            scelta, messaggio, valida = check_risposta(trova)
+
+            if not valida:
+                print(messaggio)
+                continue
+
+            if not scelta:
+                print(messaggio)
+                break
+
+            nome_cercato = input("Inserisci il nome della persona da cercare: ")
+            persona_trovata = trova_persona(elenco_persone, nome_cercato)
+
+            if persona_trovata:
+                print(f"\nInformazioni sulla persona trovata:")
+                for chiave, valore in persona_trovata.items():
+                    print(f"{chiave}: {valore}")
+            else:
+                print("Persona non trovata.")
+
+            break
+
+    # ...
+    # elif opzione == 3:
+    # ...
+    # elif opzione == 4:
+    # ...
+
+
+
+
+    # while True:
+    #     domanda = "Vuoi inserire una nuova persona? (s/n): "
+    #     risposta = input(domanda)
+
+    #     scelta, messaggio, valida = check_risposta(risposta)
+
+    #     # se la risposta non è valida, stampo il messaggio di errore e continuo il ciclo
+    #     if not valida:
+    #         print(messaggio)
+    #         continue
+
+    #     # se la risposta è valida e l'utente ha scelto di non inserire una nuova persona, esco dal ciclo
+    #     elif not scelta:
+
+    #         while True:
+
+    #             trova = input("Vuoi cercare una persona per nome? (s/n): ")
+
+    #             scelta, messaggio, valida = check_risposta(trova)
+
+    #             if not valida:
+    #                 print(messaggio)
+    #                 continue
+
+    #             if not scelta:
+    #                 print(messaggio)
+    #                 break
+
+    #             nome_cercato = input("Inserisci il nome della persona da cercare: ")
+    #             persona_trovata = trova_persona(elenco_persone, nome_cercato)
+
+    #             if persona_trovata:
+    #                 print(f"\nInformazioni sulla persona trovata:")
+    #                 for chiave, valore in persona_trovata.items():
+    #                     print(f"{chiave}: {valore}")
+    #             else:
+    #                 print("Persona non trovata.")
+
+    #             break
+
+    #         if not scelta:
+    #             break
+
+    #         continue
+        
+    #     nome = chiedi_dato("Inserisci il nome: ")
+    #     eta = chiedi_intero("Inserisci l'età: ")
+    #     residenza = chiedi_dato("Inserisci la residenza: ")
+    #     professione = chiedi_dato("Inserisci la professione: ")
+
+    #     id_persona += 1
+    #     persona = crea_persona(nome, eta, residenza, professione)
+    #     aggiungi_persona(elenco_persone, id_persona, persona)
+
+    # salva_elenco_persone(elenco_persone, "elenco_persone.json")
       
     # for id_persona, persona in elenco_persone.items():
     #     print(f"\nInformazioni sulla persona con ID {id_persona}:")
     #     for chiave, valore in persona.items():
     #         print(f"{chiave}: {valore}")
-
-
 
 if __name__ == "__main__":
     main()
