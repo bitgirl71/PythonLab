@@ -46,5 +46,17 @@
         "eta": 44,
         "residenza": "Cuba",
         "professione": "promoter"
+    },
+    "9": {
+        "nome": "Andrea",
+        "eta": 19,
+        "residenza": "VT",
+        "professione": "studente"
+    },
+    "10": {
+        "nome": "Ciccio",
+        "eta": 101,
+        "residenza": "ovunque",
+        "professione": "IA"
     }
 }
