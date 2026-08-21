@@ -13,7 +13,7 @@ def aggiungi_persona(elenco_persone, id_persona, persona):
 
 #def cerca_persona():
 
-def check_risposta(risposta):
+def check_risposta(risposta, msg_si =):
     risposta = risposta.strip().upper()
        
     if risposta == "S":
@@ -64,8 +64,10 @@ def chiedi_dato(messaggio):
         else:
             print(messaggio_errore)
 
-def chiedi_intero(messaggio):
+def chiedi_intero(messaggio, minimo=None, massimo=None):
+
     while True:
+
         dato = input(messaggio)
 
         dato, messaggio_errore, valida = valida_dato(dato)
@@ -75,16 +77,25 @@ def chiedi_intero(messaggio):
         
         numero, messaggio_errore, valida = valida_intero(dato)
         if valida:
+
+            if minimo is not None and numero < minimo:
+                print("Troppo piccolo")
+                continue
+
+            if massimo is not None and numero > massimo:
+                print("Troppo grande")
+                continue
+
             return numero
         else:
             print(messaggio_errore)          
 
 def trova_persona(elenco_persone, nome):
 
-    for persona in elenco_persone.values():
+    for id_persona, persona in elenco_persone.items():
         if persona["nome"].lower() == nome.lower():
-            return persona
-    return None
+            return id_persona, persona
+    return None, None
 
 def normalizza_eta(elenco_persone):
     elenco_convertito = {}
@@ -116,7 +127,51 @@ def menu():
     except ValueError:
         print("Non sai nemmeno contare?!")
  
+def modifica_persona(elenco_persone):
+    nome_cercato = input("Chi vuoi modificare? ")
+    id_persona, persona_trovata = trova_persona(elenco_persone, nome_cercato)
 
+    if persona_trovata:
+        print(f"\nInformazioni sulla persona trovata:")
+        for chiave, valore in persona_trovata.items():
+            print(f"{chiave}: {valore}")
+    else:
+        print("Persona non trovata.")
+        return
+
+    print(id_persona)
+
+    print("\nQuale campo vuoi modificare? ")
+    print("1. Nome ")
+    print("2. Età ")
+    print("3. Residenza ")
+    print("4. Professione ")
+    print("5. Annulla")
+    
+    modifica = chiedi_intero("\nScelta: ", 1, 5)
+
+    if modifica == 5:
+        print("Modifica annullata.")
+        return
+
+    #print(modifica)
+
+    campi = {
+        1: "nome",
+        2: "eta",
+        3: "residenza",
+        4: "professione"
+    }
+    campo = campi[modifica]
+
+    #print(modifica)
+
+    messaggio = f"Il contenuto attuale del campo {campo} è {persona_trovata[campo]}"
+    print(messaggio)
+    risposta = input("\nVuoi modificarlo? s/n")
+    risposta = check_risposta(risposta)
+
+    
 def main():
     #elenco_persone = {}
     elenco_persone = carica_elenco_persone("elenco_persone.json")
@@ -162,7 +217,7 @@ def main():
                 break
 
             nome_cercato = input("Inserisci il nome della persona da cercare: ")
-            persona_trovata = trova_persona(elenco_persone, nome_cercato)
+            id_persona, persona_trovata = trova_persona(elenco_persone, nome_cercato)
 
             if persona_trovata:
                 print(f"\nInformazioni sulla persona trovata:")
@@ -170,11 +225,11 @@ def main():
                     print(f"{chiave}: {valore}")
             else:
                 print("Persona non trovata.")
-
             break
 
-    # ...
-    # elif opzione == 3:
+    elif opzione == 3:
+        modifica_persona(elenco_persone)
+
     # ...
     # elif opzione == 4:
     # ...

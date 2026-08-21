@@ -58,5 +58,11 @@
         "eta": 101,
         "residenza": "ovunque",
         "professione": "IA"
+    },
+    "11": {
+        "nome": "Ermenegildo",
+        "eta": 71,
+        "residenza": "Agrigento",
+        "professione": "scrittore"
     }
 }
