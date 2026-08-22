@@ -212,9 +212,6 @@ def modifica_persona(elenco_persone):
         for chiave, valore in elenco_persone[id_persona].items():
             print(f"{chiave}: {valore}")
 
-
-    
-
     
 def main():
     #elenco_persone = {}
@@ -225,57 +222,59 @@ def main():
     else:
         id_persona = 0
 
-    opzione = menu()
+    while True:
+        opzione = menu()
 
-    if opzione == 1:
+        if opzione == 1:
 
-        nome = chiedi_dato("Inserisci il nome: ")
-        eta = chiedi_intero("Inserisci l'età: ")
-        residenza = chiedi_dato("Inserisci la residenza: ")
-        professione = chiedi_dato("Inserisci la professione: ")
+            nome = chiedi_dato("Inserisci il nome: ")
+            eta = chiedi_intero("Inserisci l'età: ")
+            residenza = chiedi_dato("Inserisci la residenza: ")
+            professione = chiedi_dato("Inserisci la professione: ")
         
-        id_persona += 1
-        persona = crea_persona(nome, eta, residenza, professione)
-        aggiungi_persona(elenco_persone, id_persona, persona)
+            id_persona += 1
+            persona = crea_persona(nome, eta, residenza, professione)
+            aggiungi_persona(elenco_persone, id_persona, persona)
         
-        salva_elenco_persone(elenco_persone, "elenco_persone.json")
+            salva_elenco_persone(elenco_persone, "elenco_persone.json")
       
-        for id_persona, persona in elenco_persone.items():
-            print(f"\nInformazioni sulla persona con ID {id_persona}:")
-            for chiave, valore in persona.items():
-                print(f"{chiave}: {valore}")
+            for id_persona, persona in elenco_persone.items():
+                print(f"\nInformazioni sulla persona con ID {id_persona}:")
+                for chiave, valore in persona.items():
+                    print(f"{chiave}: {valore}")
 
-    elif opzione == 2:
-        while True:
+        elif opzione == 2:
+            while True:
 
-            trova = input("Vuoi cercare una persona per nome? (s/n): ")
+                trova = input("Vuoi cercare una persona per nome? (s/n): ")
 
-            scelta, messaggio, valida = check_risposta(trova)
+                scelta, messaggio, valida = check_risposta(trova)
 
-            if not valida:
-                print(messaggio)
-                continue
+                if not valida:
+                    print(messaggio)
+                    continue
 
-            if not scelta:
-                print(messaggio)
+                if not scelta:
+                    print(messaggio)
+                    break
+
+                nome_cercato = input("Inserisci il nome della persona da cercare: ")
+                id_persona, persona_trovata = trova_persona(elenco_persone, nome_cercato)
+
+                if persona_trovata:
+                    print(f"\nInformazioni sulla persona trovata:")
+                    for chiave, valore in persona_trovata.items():
+                        print(f"{chiave}: {valore}")
+                else:
+                    print("Persona non trovata.")
                 break
 
-            nome_cercato = input("Inserisci il nome della persona da cercare: ")
-            id_persona, persona_trovata = trova_persona(elenco_persone, nome_cercato)
+        elif opzione == 3:
+            modifica_persona(elenco_persone)
 
-            if persona_trovata:
-                print(f"\nInformazioni sulla persona trovata:")
-                for chiave, valore in persona_trovata.items():
-                    print(f"{chiave}: {valore}")
-            else:
-                print("Persona non trovata.")
+        elif opzione == 4:
             break
-
-    elif opzione == 3:
-        modifica_persona(elenco_persone)
-
-    # ...
-    # elif opzione == 4:
+        
     # ...
 
 
