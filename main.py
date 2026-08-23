@@ -1,3 +1,7 @@
+"""
+PythonLab 1.0 - CLI working
+"""
+
 import json
 
 def crea_persona(nome, eta, residenza, professione):
