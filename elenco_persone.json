@@ -12,10 +12,10 @@
         "professione": "consulente"
     },
     "3": {
-        "nome": "Dadi",
-        "eta": 71,
-        "residenza": "FI",
-        "professione": "babysitter"
+        "nome": "Enrico",
+        "eta": 24,
+        "residenza": "Chicago",
+        "professione": "illustratore"
     },
     "4": {
         "nome": "Luca",
@@ -64,5 +64,17 @@
         "eta": 71,
         "residenza": "Agrigento",
         "professione": "scrittore"
+    },
+    "12": {
+        "nome": "Fernanda",
+        "eta": 52,
+        "residenza": "Prato",
+        "professione": "ballerina di zumba"
+    },
+    "13": {
+        "nome": "Demetrio",
+        "eta": 5,
+        "residenza": "Lastra a Signa",
+        "professione": "venditore"
     }
 }
