@@ -1,86 +1,14 @@
 {
     "1": {
-        "nome": "Anna Grazia",
+        "nome": "Anna",
         "eta": 55,
-        "residenza": "Tavarnuzze",
-        "professione": "addetto vendite MW"
+        "residenza": "FI",
+        "professione": "addetta vendite MW"
     },
     "2": {
-        "nome": "Alex",
-        "eta": 54,
+        "nome": "Gigio",
+        "eta": 7,
         "residenza": "Tavarnuzze",
-        "professione": "consulente"
-    },
-    "3": {
-        "nome": "Enrico",
-        "eta": 24,
-        "residenza": "Chicago",
-        "professione": "illustratore"
-    },
-    "4": {
-        "nome": "Luca",
-        "eta": 46,
-        "residenza": "CA",
-        "professione": "cameriere"
-    },
-    "5": {
-        "nome": "Marisa",
-        "eta": 82,
-        "residenza": "FI",
-        "professione": "pensionata"
-    },
-    "6": {
-        "nome": "Nosferatu",
-        "eta": 2345,
-        "residenza": "Transilvania",
-        "professione": "vampiro"
-    },
-    "7": {
-        "nome": "Ettore",
-        "eta": 18,
-        "residenza": "CT",
-        "professione": "cameriere"
-    },
-    "8": {
-        "nome": "Esther",
-        "eta": 44,
-        "residenza": "Cuba",
-        "professione": "promoter"
-    },
-    "9": {
-        "nome": "Andrea",
-        "eta": 19,
-        "residenza": "VT",
-        "professione": "studente"
-    },
-    "10": {
-        "nome": "Ciccio",
-        "eta": 101,
-        "residenza": "ovunque",
-        "professione": "IA"
-    },
-    "11": {
-        "nome": "Ermenegildo",
-        "eta": 71,
-        "residenza": "Agrigento",
-        "professione": "scrittore"
-    },
-    "12": {
-        "nome": "Fernanda",
-        "eta": 52,
-        "residenza": "Prato",
-        "professione": "ballerina di zumba"
-    },
-    "13": {
-        "nome": "Demetrio",
-        "eta": 5,
-        "residenza": "Lastra a Signa",
-        "professione": "venditore"
-    },
-    "14": {
-        "nome": "Edoardo",
-        "eta": 41,
-        "residenza": "Boston",
-        "professione": "antiquario"
+        "professione": "gatto"
     }
 }

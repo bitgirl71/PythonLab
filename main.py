@@ -140,7 +140,8 @@ def menu():
  
 def modifica_persona(elenco_persone):
     nome_cercato = input("Chi vuoi modificare? ")
-    id_persona, persona_trovata = trova_persona(elenco_persone, nome_cercato)
+    # Modifica
+    id_trovato, persona_trovata = trova_persona(elenco_persone, nome_cercato)
 
     if persona_trovata:
         print(f"\nInformazioni sulla persona trovata:")
@@ -212,8 +213,8 @@ def modifica_persona(elenco_persone):
         persona_trovata[campo] = nuovo_valore
         salva_elenco_persone(elenco_persone, "elenco_persone.json")
 
-        print(f"\nScheda aggiornata (ID {id_persona}):")
-        for chiave, valore in elenco_persone[id_persona].items():
+        print(f"\nScheda aggiornata (ID {id_trovato}):")
+        for chiave, valore in elenco_persone[id_trovato].items():
             print(f"{chiave}: {valore}")
         input("\nPremi INVIO per continuare...")
 
@@ -238,6 +239,8 @@ def main():
             professione = chiedi_dato("Inserisci la professione: ")
         
             id_persona += 1
+            print(f"DEBUG: id_persona = {id_persona!r}")
+
             persona = crea_persona(nome, eta, residenza, professione)
             aggiungi_persona(elenco_persone, id_persona, persona)
         
@@ -270,7 +273,8 @@ def main():
                     break
 
                 nome_cercato = input("Inserisci il nome della persona da cercare: ")
-                id_persona, persona_trovata = trova_persona(elenco_persone, nome_cercato)
+                # Visualizzazione
+                _, persona_trovata = trova_persona(elenco_persone, nome_cercato)
 
                 if persona_trovata:
                     print(f"\nInformazioni sulla persona trovata:")
@@ -286,72 +290,6 @@ def main():
 
         elif opzione == 4:
             break
-        
-    # ...
-
-
-
-
-    # while True:
-    #     domanda = "Vuoi inserire una nuova persona? (s/n): "
-    #     risposta = input(domanda)
-
-    #     scelta, messaggio, valida = check_risposta(risposta)
-
-    #     # se la risposta non è valida, stampo il messaggio di errore e continuo il ciclo
-    #     if not valida:
-    #         print(messaggio)
-    #         continue
-
-    #     # se la risposta è valida e l'utente ha scelto di non inserire una nuova persona, esco dal ciclo
-    #     elif not scelta:
-
-    #         while True:
-
-    #             trova = input("Vuoi cercare una persona per nome? (s/n): ")
-
-    #             scelta, messaggio, valida = check_risposta(trova)
-
-    #             if not valida:
-    #                 print(messaggio)
-    #                 continue
-
-    #             if not scelta:
-    #                 print(messaggio)
-    #                 break
-
-    #             nome_cercato = input("Inserisci il nome della persona da cercare: ")
-    #             persona_trovata = trova_persona(elenco_persone, nome_cercato)
-
-    #             if persona_trovata:
-    #                 print(f"\nInformazioni sulla persona trovata:")
-    #                 for chiave, valore in persona_trovata.items():
-    #                     print(f"{chiave}: {valore}")
-    #             else:
-    #                 print("Persona non trovata.")
-
-    #             break
-
-    #         if not scelta:
-    #             break
-
-    #         continue
-        
-    #     nome = chiedi_dato("Inserisci il nome: ")
-    #     eta = chiedi_intero("Inserisci l'età: ")
-    #     residenza = chiedi_dato("Inserisci la residenza: ")
-    #     professione = chiedi_dato("Inserisci la professione: ")
-
-    #     id_persona += 1
-    #     persona = crea_persona(nome, eta, residenza, professione)
-    #     aggiungi_persona(elenco_persone, id_persona, persona)
-
-    # salva_elenco_persone(elenco_persone, "elenco_persone.json")
-      
-    # for id_persona, persona in elenco_persone.items():
-    #     print(f"\nInformazioni sulla persona con ID {id_persona}:")
-    #     for chiave, valore in persona.items():
-    #         print(f"{chiave}: {valore}")
 
 if __name__ == "__main__":
     main()
