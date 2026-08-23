@@ -211,6 +211,7 @@ def modifica_persona(elenco_persone):
         print(f"\nScheda aggiornata (ID {id_persona}):")
         for chiave, valore in elenco_persone[id_persona].items():
             print(f"{chiave}: {valore}")
+        input("\nPremi INVIO per continuare...")
 
     
 def main():

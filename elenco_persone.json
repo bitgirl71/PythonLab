@@ -8,7 +8,7 @@
     "2": {
         "nome": "Alex",
         "eta": 54,
-        "residenza": "Campi Bisenzio",
+        "residenza": "Tavarnuzze",
         "professione": "consulente"
     },
     "3": {
@@ -76,5 +76,11 @@
         "eta": 5,
         "residenza": "Lastra a Signa",
         "professione": "venditore"
+    },
+    "14": {
+        "nome": "Edoardo",
+        "eta": 41,
+        "residenza": "Boston",
+        "professione": "antiquario"
     }
 }
