@@ -232,8 +232,14 @@ def menu_visualizzazione(elenco_persone):
         opzione = chiedi_intero("\nScelta: ", 1, 6)
 
         if opzione == 5:
-            print("Questa parte è in costruzione")
+            #print("Questa parte è in costruzione")
+
+            for id_persona, persona in elenco_persone.items():
+                print(f"\nInformazioni sulla persona con ID {id_persona}:")
+                for chiave, valore in persona.items():
+                    print(f"{chiave}: {valore}")
             input("\nPremi INVIO per continuare...")
+
             continue
 
         if opzione == 6:
