@@ -10,5 +10,23 @@
         "eta": 7,
         "residenza": "Tavarnuzze",
         "professione": "gatto"
+    },
+    "3": {
+        "nome": "Dadi",
+        "eta": 71,
+        "residenza": "Fiesole",
+        "professione": "babysitter"
+    },
+    "4": {
+        "nome": "Alex",
+        "eta": 54,
+        "residenza": "Padova",
+        "professione": "consulente"
+    },
+    "5": {
+        "nome": "Esther",
+        "eta": 42,
+        "residenza": "Venezia",
+        "professione": "violinista"
     }
 }

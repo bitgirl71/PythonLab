@@ -218,6 +218,71 @@ def modifica_persona(elenco_persone):
             print(f"{chiave}: {valore}")
         input("\nPremi INVIO per continuare...")
 
+def menu_visualizzazione(elenco_persone):
+    
+    while True:
+        print("\nCosa vuoi visualizzare?\n")
+        print("1. Nome ")
+        print("2. Età ")
+        print("3. Residenza ")
+        print("4. Professione ")
+        print("5. Tutti i record ")
+        print("6. Indietro")
+    
+        opzione = chiedi_intero("\nScelta: ", 1, 6)
+
+        if opzione == 5:
+            print("Questa parte è in costruzione")
+            input("\nPremi INVIO per continuare...")
+            continue
+
+        if opzione == 6:
+            print("Torna indietro.")
+            return
+
+        campi = {
+            1: ("nome", chiedi_dato),
+            2: ("eta", chiedi_intero),
+            3: ("residenza", chiedi_dato),
+            4: ("professione", chiedi_dato)
+        }
+        campo, chiedi_valore = campi[opzione]
+        #valore_cercato = chiedi_valore(...)
+
+        visualizza(campo, chiedi_valore, elenco_persone)
+
+    input("\nPremi INVIO per continuare...")
+
+def visualizza(campo, chiedi_valore, elenco_persone):
+
+    valore_cercato = chiedi_valore(
+        f"Inserisci il valore per {campo}: "
+        )
+
+    for _ , persona_trovata in elenco_persone.items():
+
+        if chiedi_valore == chiedi_dato:
+
+            if persona_trovata[campo].lower() == valore_cercato.lower():
+                print(f"\nInformazioni sulla persona trovata:")
+                for chiave, valore in persona_trovata.items():
+                    print(f"{chiave}: {valore}")
+                break
+
+        elif chiedi_valore == chiedi_intero:
+
+            if persona_trovata[campo] == valore_cercato:
+                print(f"\nInformazioni sulla persona trovata:")
+                for chiave, valore in persona_trovata.items():
+                    print(f"{chiave}: {valore}")
+                break
+
+    else:
+            #print(persona_trovata[campo])
+            #print(valore_cercato)
+            print("Persona non trovata.")
+
+    input("\nPremi INVIO per continuare...")
     
 def main():
     #elenco_persone = {}
@@ -258,32 +323,8 @@ def main():
             input("\nPremi INVIO per continuare...")
                     
         elif opzione == 2:
-            while True:
-
-                trova = input("Vuoi cercare una persona per nome? (s/n): ")
-
-                scelta, messaggio, valida = check_risposta(trova)
-
-                if not valida:
-                    print(messaggio)
-                    continue
-
-                if not scelta:
-                    print(messaggio)
-                    break
-
-                nome_cercato = input("Inserisci il nome della persona da cercare: ")
-                # Visualizzazione
-                _, persona_trovata = trova_persona(elenco_persone, nome_cercato)
-
-                if persona_trovata:
-                    print(f"\nInformazioni sulla persona trovata:")
-                    for chiave, valore in persona_trovata.items():
-                        print(f"{chiave}: {valore}")
-                else:
-                    print("Persona non trovata.")
-                break
-            input("\nPremi INVIO per continuare...")
+            menu_visualizzazione(elenco_persone)
+            #visualizza(elenco_persone)
 
         elif opzione == 3:
             modifica_persona(elenco_persone)
@@ -291,5 +332,5 @@ def main():
         elif opzione == 4:
             break
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":                        
+    main()  
