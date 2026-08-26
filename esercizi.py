@@ -40,6 +40,15 @@ persona = json.loads(testo_json)
 print(persona)
 print(type(persona))
 
+id_trovati = []
+
+persone = [
+    {"nome": "Anna", "eta": 55},
+    {"nome": "Alex", "eta": 54}
+]
+
+print(persone)
+print(type(persone))
 
 # # # for: percorre gli elementi di una sequenza
 

@@ -281,9 +281,8 @@ def visualizza(campo, chiedi_valore, elenco_persone):
                 print(f"\nInformazioni sulla persona trovata:")
                 for chiave, valore in persona_trovata.items():
                     print(f"{chiave}: {valore}")
-                break
-
-    else:
+                #break
+        else:
             #print(persona_trovata[campo])
             #print(valore_cercato)
             print("Persona non trovata.")
