@@ -1,5 +1,5 @@
 """
-PythonLab 1.0 - CLI working
+PythonLab 1.1 - CLI working
 """
 
 import json
