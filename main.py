@@ -253,13 +253,14 @@ def menu_visualizzazione(elenco_persone):
             4: ("professione", chiedi_dato)
         }
         campo, chiedi_valore = campi[opzione]
-        #valore_cercato = chiedi_valore(...)
 
-        visualizza(campo, chiedi_valore, elenco_persone)
+        trova_corrispondenze(campo, chiedi_valore, elenco_persone)
 
     input("\nPremi INVIO per continuare...")
 
-def visualizza(campo, chiedi_valore, elenco_persone):
+def trova_corrispondenze(campo, chiedi_valore, elenco_persone):
+
+    trovato = False
 
     valore_cercato = chiedi_valore(
         f"Inserisci il valore per {campo}: "
@@ -268,26 +269,25 @@ def visualizza(campo, chiedi_valore, elenco_persone):
     for _ , persona_trovata in elenco_persone.items():
 
         if chiedi_valore == chiedi_dato:
-
-            if persona_trovata[campo].lower() == valore_cercato.lower():
-                print(f"\nInformazioni sulla persona trovata:")
-                for chiave, valore in persona_trovata.items():
-                    print(f"{chiave}: {valore}")
-                break
+            
+            if persona_trovata[campo].lower() == valore_cercato:
+                trovato = visualizza(persona_trovata)
 
         elif chiedi_valore == chiedi_intero:
 
             if persona_trovata[campo] == valore_cercato:
-                print(f"\nInformazioni sulla persona trovata:")
-                for chiave, valore in persona_trovata.items():
-                    print(f"{chiave}: {valore}")
-                #break
-        else:
-            #print(persona_trovata[campo])
-            #print(valore_cercato)
-            print("Persona non trovata.")
+                trovato = visualizza(persona_trovata)  
 
+    if not trovato:
+        print("Persona non trovata.")
+        
     input("\nPremi INVIO per continuare...")
+
+def visualizza(persona_trovata):
+    print(f"\nInformazioni sulla persona trovata:")
+    for chiave, valore in persona_trovata.items():
+        print(f"{chiave}: {valore}")
+    return True
     
 def main():
     #elenco_persone = {}

@@ -328,5 +328,11 @@
         "eta": 99,
         "residenza": "Firenze",
         "professione": "violinista"
+    },
+    "56": {
+        "nome": "Adelina",
+        "eta": 33,
+        "residenza": "Merano",
+        "professione": "farmacista"
     }
 }
