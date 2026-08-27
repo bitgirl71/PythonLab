@@ -232,12 +232,14 @@ def menu_visualizzazione(elenco_persone):
         opzione = chiedi_intero("\nScelta: ", 1, 6)
 
         if opzione == 5:
-            #print("Questa parte è in costruzione")
 
             for id_persona, persona in elenco_persone.items():
                 print(f"\nInformazioni sulla persona con ID {id_persona}:")
                 for chiave, valore in persona.items():
                     print(f"{chiave}: {valore}")
+
+            if not elenco_persone:
+                print("Archivio vuoto.\n")        
             input("\nPremi INVIO per continuare...")
 
             continue
@@ -316,11 +318,6 @@ def main():
         
             salva_elenco_persone(elenco_persone, "elenco_persone.json")
       
-            # for id_persona, persona in elenco_persone.items():
-            #     print(f"\nInformazioni sulla persona con ID {id_persona}:")
-            #     for chiave, valore in persona.items():
-            #         print(f"{chiave}: {valore}")
-            # input("\nPremi INVIO per continuare...")
             print(f"\nPersona inserita (ID {id_persona}):")
             for chiave, valore in persona.items():
                 print(f"{chiave}: {valore}")
@@ -329,7 +326,6 @@ def main():
                     
         elif opzione == 2:
             menu_visualizzazione(elenco_persone)
-            #visualizza(elenco_persone)
 
         elif opzione == 3:
             modifica_persona(elenco_persone)
