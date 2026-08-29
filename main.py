@@ -272,7 +272,8 @@ def trova_corrispondenze(campo, chiedi_valore, elenco_persone):
 
         if chiedi_valore == chiedi_dato:
             
-            if persona_trovata[campo].lower() == valore_cercato:
+            #if persona_trovata[campo].lower() == valore_cercato.lower():
+            if persona_trovata[campo].lower().startswith(valore_cercato.lower()):
                 trovato = visualizza(persona_trovata)
 
         elif chiedi_valore == chiedi_intero:
