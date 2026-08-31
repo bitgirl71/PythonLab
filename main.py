@@ -256,7 +256,10 @@ def menu_visualizzazione(elenco_persone):
         }
         campo, chiedi_valore = campi[opzione]
 
-        trova_corrispondenze(campo, chiedi_valore, elenco_persone)
+        #trova_corrispondenze(campo, chiedi_valore, elenco_persone)
+        risultato = trova_corrispondenze(campo, chiedi_valore, elenco_persone)
+        print(risultato)
+
 
     input("\nPremi INVIO per continuare...")
 
@@ -268,24 +271,45 @@ def trova_corrispondenze(campo, chiedi_valore, elenco_persone):
         f"Inserisci il valore per {campo}: "
         )
 
-    for _ , persona_trovata in elenco_persone.items():
+    corrispondenze = {}
 
-        if chiedi_valore == chiedi_dato:
-            
-            #if persona_trovata[campo].lower() == valore_cercato.lower():
+    for ID_trovato , persona_trovata in elenco_persone.items():
+        if confronta(campo):
             if persona_trovata[campo].lower().startswith(valore_cercato.lower()):
-                trovato = visualizza(persona_trovata)
-
-        elif chiedi_valore == chiedi_intero:
-
+                corrispondenze[ID_trovato] = persona_trovata
+        else:
             if persona_trovata[campo] == valore_cercato:
-                trovato = visualizza(persona_trovata)  
+                corrispondenze[ID_trovato] = persona_trovata  
 
-    if not trovato:
+
+        # if chiedi_valore == chiedi_dato:
+            
+        #     #if persona_trovata[campo].lower() == valore_cercato.lower():
+        #     if persona_trovata[campo].lower().startswith(valore_cercato.lower()):
+        #         #trovato = visualizza(persona_trovata)
+        #         corrispondenze[ID_trovato] = persona_trovata
+
+        # elif chiedi_valore == chiedi_intero:
+
+        #     if persona_trovata[campo] == valore_cercato:
+        #         #trovato = visualizza(persona_trovata)
+        #         corrispondenze[ID_trovato] = persona_trovata  
+
+    #if not trovato:
+    if not corrispondenze:
         print("Persona non trovata.")
-        
-    input("\nPremi INVIO per continuare...")
+    
+    return corrispondenze
 
+    #input("\nPremi INVIO per continuare...")
+
+def confronta(campo):
+    # if campo == "eta":
+    #     return False
+    # else:
+    #     return True
+    return campo != "eta"
+                                  
 def visualizza(persona_trovata):
     print(f"\nInformazioni sulla persona trovata:")
     for chiave, valore in persona_trovata.items():
