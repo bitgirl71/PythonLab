@@ -141,17 +141,34 @@ def menu():
 def modifica_persona(elenco_persone):
     nome_cercato = input("Chi vuoi modificare? ")
     # Modifica
-    id_trovato, persona_trovata = trova_persona(elenco_persone, nome_cercato)
+    # id_trovato, persona_trovata = trova_persona(elenco_persone, nome_cercato)
 
-    if persona_trovata:
-        print(f"\nInformazioni sulla persona trovata:")
-        for chiave, valore in persona_trovata.items():
-            print(f"{chiave}: {valore}")
+    # if persona_trovata:
+    #     print(f"\nInformazioni sulla persona trovata:")
+    #     for chiave, valore in persona_trovata.items():
+    #         print(f"{chiave}: {valore}")
+    # else:
+    #     print("Persona non trovata.")
+    #     return
+
+    risultato = trova_corrispondenze("nome", nome_cercato, elenco_persone)
+
+    for id_persona, persona in risultato.items():
+            visualizza(persona, id_persona)
+
+    input("\nPremi INVIO per continuare...")
+
+    id_scelto = chiedi_intero("\nQuale ID vuoi modificare? ")
+
+    if id_scelto in risultato:
+        persona_trovata = risultato[id_scelto]
+        id_trovato = id_scelto
     else:
-        print("Persona non trovata.")
+        print("ID non valido.")
         return
 
     while True:
+
         print("\nQuale campo vuoi modificare? ")
         print("1. Nome ")
         print("2. Età ")
@@ -257,19 +274,17 @@ def menu_visualizzazione(elenco_persone):
         campo, chiedi_valore = campi[opzione]
 
         #trova_corrispondenze(campo, chiedi_valore, elenco_persone)
-        risultato = trova_corrispondenze(campo, chiedi_valore, elenco_persone)
-        print(risultato)
-
-
-    input("\nPremi INVIO per continuare...")
-
-def trova_corrispondenze(campo, chiedi_valore, elenco_persone):
-
-    trovato = False
-
-    valore_cercato = chiedi_valore(
-        f"Inserisci il valore per {campo}: "
+        valore_cercato = chiedi_valore(
+            f"Inserisci il valore per {campo}: "
         )
+        risultato = trova_corrispondenze(campo, valore_cercato, elenco_persone)
+
+        for persona in risultato.values():
+            visualizza(persona)
+
+        input("\nPremi INVIO per continuare...")
+
+def trova_corrispondenze(campo, valore_cercato, elenco_persone):
 
     corrispondenze = {}
 
@@ -281,37 +296,20 @@ def trova_corrispondenze(campo, chiedi_valore, elenco_persone):
             if persona_trovata[campo] == valore_cercato:
                 corrispondenze[ID_trovato] = persona_trovata  
 
-
-        # if chiedi_valore == chiedi_dato:
-            
-        #     #if persona_trovata[campo].lower() == valore_cercato.lower():
-        #     if persona_trovata[campo].lower().startswith(valore_cercato.lower()):
-        #         #trovato = visualizza(persona_trovata)
-        #         corrispondenze[ID_trovato] = persona_trovata
-
-        # elif chiedi_valore == chiedi_intero:
-
-        #     if persona_trovata[campo] == valore_cercato:
-        #         #trovato = visualizza(persona_trovata)
-        #         corrispondenze[ID_trovato] = persona_trovata  
-
-    #if not trovato:
     if not corrispondenze:
         print("Persona non trovata.")
     
     return corrispondenze
 
-    #input("\nPremi INVIO per continuare...")
-
 def confronta(campo):
-    # if campo == "eta":
-    #     return False
-    # else:
-    #     return True
     return campo != "eta"
                                   
-def visualizza(persona_trovata):
-    print(f"\nInformazioni sulla persona trovata:")
+def visualizza(persona_trovata, id_persona=None):
+    if id_persona is not None:
+        print(f"\nInformazioni sulla persona con ID {id_persona}:")
+    else:
+        print(f"\nInformazioni sulla persona trovata:")
+
     for chiave, valore in persona_trovata.items():
         print(f"{chiave}: {valore}")
     return True
