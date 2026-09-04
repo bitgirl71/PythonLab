@@ -141,99 +141,91 @@ def menu():
 def modifica_persona(elenco_persone):
     nome_cercato = input("Chi vuoi modificare? ")
     # Modifica
-    # id_trovato, persona_trovata = trova_persona(elenco_persone, nome_cercato)
-
-    # if persona_trovata:
-    #     print(f"\nInformazioni sulla persona trovata:")
-    #     for chiave, valore in persona_trovata.items():
-    #         print(f"{chiave}: {valore}")
-    # else:
-    #     print("Persona non trovata.")
-    #     return
-
     risultato = trova_corrispondenze("nome", nome_cercato, elenco_persone)
 
     for id_persona, persona in risultato.items():
             visualizza(persona, id_persona)
 
-    input("\nPremi INVIO per continuare...")
-
-    id_scelto = chiedi_intero("\nQuale ID vuoi modificare? ")
-
-    if id_scelto in risultato:
-        persona_trovata = risultato[id_scelto]
-        id_trovato = id_scelto
-    else:
-        print("ID non valido.")
-        return
-
     while True:
 
-        print("\nQuale campo vuoi modificare? ")
-        print("1. Nome ")
-        print("2. Età ")
-        print("3. Residenza ")
-        print("4. Professione ")
-        print("5. Annulla")
-    
-        modifica = chiedi_intero("\nScelta: ", 1, 5)
+        id_scelto = chiedi_intero("\nQuale ID vuoi modificare? ")
 
-        if modifica == 5:
-            print("Modifica annullata.")
-            return
-
-        campi = {
-            1: "nome",
-            2: "eta",
-            3: "residenza",
-            4: "professione"
-        }
-        campo = campi[modifica]
-
-        messaggio = f"Il contenuto attuale del campo {campo} è {persona_trovata[campo]}"
-        print(messaggio)
-        risposta = input("\nVuoi modificarlo? s/n ")
-        scelta, messaggio, valida = check_risposta(
-            risposta,
-            "Modifica confermata",
-            "Modifica annullata"
-            )
-
-        if not valida:
-            print(messaggio)
-            continue
-
-        if not scelta:
-            print(messaggio)
-            break
-
-        if campo == "eta":
-            nuovo_valore = chiedi_intero("Inserisci la nuova età: ", minimo=0, massimo=120)
+        if id_scelto in risultato:
+            persona_trovata = risultato[id_scelto]
+            id_trovato = id_scelto
         else:
-            nuovo_valore = chiedi_dato(f"Inserisci il nuovo valore per {campo}: ")
-
-        print(f"Nuovo valore: {nuovo_valore}")
-        risposta = input("\nConfermi la modifica? s/n ")
-        scelta, messaggio, valida = check_risposta(
-            risposta,
-            "Modifica confermata",
-            "Modifica annullata"
-            )
-        if not valida:
-            print(messaggio)
+            print("ID non valido.")
+            input("\nPremi INVIO per continuare...")
             continue
 
-        if not scelta:
+        while True:
+            print("\nQuale campo vuoi modificare? ")
+            print("1. Nome ")
+            print("2. Età ")
+            print("3. Residenza ")
+            print("4. Professione ")
+            print("5. Annulla")
+    
+            modifica = chiedi_intero("\nScelta: ", 1, 5)
+
+            if modifica == 5:
+                print("Modifica annullata.")
+                return
+
+            campi = {
+                1: "nome",
+                2: "eta",
+                3: "residenza",
+                4: "professione"
+            }
+            campo = campi[modifica]
+
+            messaggio = f"Il contenuto attuale del campo {campo} è {persona_trovata[campo]}"
             print(messaggio)
-            return
+            risposta = input("\nVuoi modificarlo? s/n ")
+            scelta, messaggio, valida = check_risposta(
+                risposta,
+                "Modifica confermata",
+                "Modifica annullata"
+                )
 
-        persona_trovata[campo] = nuovo_valore
-        salva_elenco_persone(elenco_persone, "elenco_persone.json")
+            if not valida:
+                print(messaggio)
+                continue
 
-        print(f"\nScheda aggiornata (ID {id_trovato}):")
-        for chiave, valore in elenco_persone[id_trovato].items():
-            print(f"{chiave}: {valore}")
-        input("\nPremi INVIO per continuare...")
+            if not scelta:
+                print(messaggio)
+                #break
+                continue
+
+            if campo == "eta":
+                nuovo_valore = chiedi_intero("Inserisci la nuova età: ", minimo=0, massimo=120)
+            else:
+                nuovo_valore = chiedi_dato(f"Inserisci il nuovo valore per {campo}: ")
+
+            print(f"Nuovo valore: {nuovo_valore}")
+            risposta = input("\nConfermi la modifica? s/n ")
+            scelta, messaggio, valida = check_risposta(
+                risposta,
+                "Modifica confermata",
+                "Modifica annullata"
+                )
+            if not valida:
+                print(messaggio)
+                continue
+
+            if not scelta:
+                print(messaggio)
+                #return
+                continue
+
+            persona_trovata[campo] = nuovo_valore
+            salva_elenco_persone(elenco_persone, "elenco_persone.json")
+
+            print(f"\nScheda aggiornata (ID {id_trovato}):")
+            for chiave, valore in elenco_persone[id_trovato].items():
+                print(f"{chiave}: {valore}")
+            input("\nPremi INVIO per continuare...")
 
 def menu_visualizzazione(elenco_persone):
     
