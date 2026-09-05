@@ -1,5 +1,5 @@
 """
-PythonLab 1.1 - CLI working
+PythonLab 1.1.1 - CLI working
 """
 
 import json
@@ -139,14 +139,13 @@ def menu():
         print("Non sai nemmeno contare?!")
  
 def modifica_persona(elenco_persone):
-    nome_cercato = input("Chi vuoi modificare? ")
-    # Modifica
-    risultato = trova_corrispondenze("nome", nome_cercato, elenco_persone)
-
-    for id_persona, persona in risultato.items():
-            visualizza(persona, id_persona)
-
     while True:
+        nome_cercato = input("Chi vuoi modificare? ")
+        # Modifica
+        risultato = trova_corrispondenze("nome", nome_cercato, elenco_persone)
+
+        for id_persona, persona in risultato.items():
+            visualizza(persona, id_persona)
 
         id_scelto = chiedi_intero("\nQuale ID vuoi modificare? ")
 
@@ -164,7 +163,7 @@ def modifica_persona(elenco_persone):
             print("2. Età ")
             print("3. Residenza ")
             print("4. Professione ")
-            print("5. Annulla")
+            print("5. Torna al menù principale")
     
             modifica = chiedi_intero("\nScelta: ", 1, 5)
 
@@ -226,6 +225,23 @@ def modifica_persona(elenco_persone):
             for chiave, valore in elenco_persone[id_trovato].items():
                 print(f"{chiave}: {valore}")
             input("\nPremi INVIO per continuare...")
+
+            #sottomenu per modificare altri campi della stessa persona
+            print("\nCosa vuoi fare?")
+            print("1. Modificare un altro campo della stessa persona")
+            print("2. Modificare un'altra persona")
+            print("3. Annullare")
+
+            scelta = chiedi_intero("\nScelta: ", 1, 3)
+
+            if scelta == 1:
+                continue
+
+            if scelta == 2:
+                break
+
+            if scelta == 3:
+                return
 
 def menu_visualizzazione(elenco_persone):
     
