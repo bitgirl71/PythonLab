@@ -15,8 +15,6 @@ def crea_persona(nome, eta, residenza, professione):
 def aggiungi_persona(elenco_persone, id_persona, persona):
     elenco_persone[id_persona] = persona
 
-#def cerca_persona():
-
 def check_risposta(risposta, msg_si=None, msg_no=None):
     risposta = risposta.strip().upper()
        
@@ -157,92 +155,107 @@ def modifica_persona(elenco_persone):
             input("\nPremi INVIO per continuare...")
             continue
 
-        while True:
-            print("\nQuale campo vuoi modificare? ")
-            print("1. Nome ")
-            print("2. Età ")
-            print("3. Residenza ")
-            print("4. Professione ")
-            print("5. Torna al menù principale")
+        scelta = modifica_scheda(
+            persona_trovata,
+            id_trovato,
+            elenco_persone
+        )
+
+        if scelta == 2:
+            continue
+
+        if scelta == 3:
+            return
+
+        
+
+def modifica_scheda(persona_trovata, id_trovato, elenco_persone):
+    while True:
+        print("\nQuale campo vuoi modificare? ")
+        print("1. Nome ")
+        print("2. Età ")
+        print("3. Residenza ")
+        print("4. Professione ")
+        print("5. Torna al menù principale")
+        
+        modifica = chiedi_intero("\nScelta: ", 1, 5)
     
-            modifica = chiedi_intero("\nScelta: ", 1, 5)
-
-            if modifica == 5:
-                print("Modifica annullata.")
-                return
-
-            campi = {
-                1: "nome",
-                2: "eta",
-                3: "residenza",
-                4: "professione"
-            }
-            campo = campi[modifica]
-
-            messaggio = f"Il contenuto attuale del campo {campo} è {persona_trovata[campo]}"
+        if modifica == 5:
+            print("Modifica annullata.")
+            return 3
+    
+        campi = {
+            1: "nome",
+            2: "eta",
+            3: "residenza",
+            4: "professione"
+        }
+        campo = campi[modifica]
+    
+        messaggio = f"Il contenuto attuale del campo {campo} è {persona_trovata[campo]}"
+        print(messaggio)
+        risposta = input("\nVuoi modificarlo? s/n ")
+        scelta, messaggio, valida = check_risposta(
+            risposta,
+            "Modifica confermata",
+            "Modifica annullata"
+            )
+    
+        if not valida:
             print(messaggio)
-            risposta = input("\nVuoi modificarlo? s/n ")
-            scelta, messaggio, valida = check_risposta(
-                risposta,
-                "Modifica confermata",
-                "Modifica annullata"
-                )
-
-            if not valida:
-                print(messaggio)
-                continue
-
-            if not scelta:
-                print(messaggio)
-                #break
-                continue
-
-            if campo == "eta":
-                nuovo_valore = chiedi_intero("Inserisci la nuova età: ", minimo=0, massimo=120)
-            else:
-                nuovo_valore = chiedi_dato(f"Inserisci il nuovo valore per {campo}: ")
-
-            print(f"Nuovo valore: {nuovo_valore}")
-            risposta = input("\nConfermi la modifica? s/n ")
-            scelta, messaggio, valida = check_risposta(
-                risposta,
-                "Modifica confermata",
-                "Modifica annullata"
-                )
-            if not valida:
-                print(messaggio)
-                continue
-
-            if not scelta:
-                print(messaggio)
-                #return
-                continue
-
-            persona_trovata[campo] = nuovo_valore
-            salva_elenco_persone(elenco_persone, "elenco_persone.json")
-
-            print(f"\nScheda aggiornata (ID {id_trovato}):")
-            for chiave, valore in elenco_persone[id_trovato].items():
-                print(f"{chiave}: {valore}")
-            input("\nPremi INVIO per continuare...")
-
-            #sottomenu per modificare altri campi della stessa persona
-            print("\nCosa vuoi fare?")
-            print("1. Modificare un altro campo della stessa persona")
-            print("2. Modificare un'altra persona")
-            print("3. Annullare")
-
-            scelta = chiedi_intero("\nScelta: ", 1, 3)
-
-            if scelta == 1:
-                continue
-
-            if scelta == 2:
-                break
-
-            if scelta == 3:
-                return
-
+            continue
+    
+        if not scelta:
+            print(messaggio)
+            #break
+            continue
+    
+        if campo == "eta":
+            nuovo_valore = chiedi_intero("Inserisci la nuova età: ", minimo=0, massimo=120)
+        else:
+            nuovo_valore = chiedi_dato(f"Inserisci il nuovo valore per {campo}: ")
+    
+        print(f"Nuovo valore: {nuovo_valore}")
+        risposta = input("\nConfermi la modifica? s/n ")
+        scelta, messaggio, valida = check_risposta(
+            risposta,
+            "Modifica confermata",
+            "Modifica annullata"
+            )
+        if not valida:
+            print(messaggio)
+            continue
+    
+        if not scelta:
+            print(messaggio)
+            #return
+            continue
+    
+        persona_trovata[campo] = nuovo_valore
+        salva_elenco_persone(elenco_persone, "elenco_persone.json")
+    
+        print(f"\nScheda aggiornata (ID {id_trovato}):")
+        for chiave, valore in elenco_persone[id_trovato].items():
+            print(f"{chiave}: {valore}")
+        input("\nPremi INVIO per continuare...")
+    
+        #sottomenu per modificare altri campi della stessa persona
+        print("\nCosa vuoi fare?")
+        print("1. Modificare un altro campo della stessa persona")
+        print("2. Modificare un'altra persona")
+        print("3. Annullare")
+    
+        scelta = chiedi_intero("\nScelta: ", 1, 3)
+    
+        if scelta == 1:
+            continue
+    
+        if scelta == 2:
+            return 2
+    
+        if scelta == 3:
+            return 3
+        
 def menu_visualizzazione(elenco_persone):
     
     while True:
