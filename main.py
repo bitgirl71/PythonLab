@@ -142,6 +142,10 @@ def modifica_persona(elenco_persone):
         # Modifica
         risultato = trova_corrispondenze("nome", nome_cercato, elenco_persone)
 
+        if not risultato:
+            print("Persona non trovata.")
+            return
+
         for id_persona, persona in risultato.items():
             visualizza(persona, id_persona)
 
