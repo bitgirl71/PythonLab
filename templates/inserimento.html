@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserimento</title>
+</head>
+<body>
+
+    <h1>PythonLab - Inserimento</h1>
+
+    {% if completato %}
+
+        <h2>Inserimento completato</h2>
+        <p>La persona è stata inserita correttamente.</p>
+        <a href="/">Torna alla home</a>
+
+    {% elif persona %}
+
+        <h2>Conferma inserimento</h2>
+
+        <p>Nome: {{ persona["nome"] }}</p>
+        <p>Età: {{ persona["eta"] }}</p>
+        <p>Residenza: {{ persona["residenza"] }}</p>
+        <p>Professione: {{ persona["professione"] }}</p>
+
+        <form action="/inserimento" method="post">
+            <input type="hidden" name="conferma" value="si">
+            <button type="submit">Conferma</button>
+        </form>
+
+        <a href="/inserimento">Annulla</a>
+
+    {% else %}
+
+        {% if messaggi_errore %}
+            <h2>Errore nell'inserimento dei dati</h2>
+
+            {% for messaggio in messaggi_errore %}
+                <p>{{ messaggio }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form action="/inserimento" method="post">
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required><br>
+
+            <label for="eta">Età:</label>
+            <input type="number" id="eta" name="eta" required><br>
+
+            <label for="residenza">Residenza:</label>
+            <input type="text" id="residenza" name="residenza" required><br>
+
+            <label for="professione">Professione:</label>
+            <input type="text" id="professione" name="professione" required><br>
+
+            <button type="submit">Inserisci</button>
+
+        </form>
+
+    {% endif %}
+
+</body>
+</html>

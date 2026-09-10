@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica</title>
+</head>
+<body>
+    <h1>PythonLab - Modifica</h1>
+
+    <form action="/modifica" method="get">
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome">
+
+        <button type="submit">Cerca</button>
+
+    </form>
+
+{% if risultato %}
+
+    <form action="/modifica" method="get">
+
+        <label for="id_persona">Scegli la persona:</label>
+
+        <select id="id_persona" name="id_persona">
+
+            {% for id_persona, persona in risultato.items() %}
+                <option value="{{ id_persona }}">
+                    {{ id_persona }} - {{ persona["nome"] }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <button type="submit">Seleziona persona</button>
+
+    </form>
+
+{% endif %}
+
+    <hr>
+
+    {% if modificato %}
+    <h2>Modifica effettuata!</h2>
+    {% endif %}
+
+    {% if persona and not modificato %}
+    <h2>Persona selezionata</h2>
+
+    <p><strong>ID:</strong> {{ id_persona }}</p>
+    <p><strong>Nome:</strong> {{ persona["nome"] }}</p>
+    <p><strong>Età:</strong> {{ persona["eta"] }}</p>
+    <p><strong>Residenza:</strong> {{ persona["residenza"] }}</p>
+    <p><strong>Professione:</strong> {{ persona["professione"] }}</p>
+
+<form action="/modifica" method="get">
+
+    <input type="hidden" name="id_persona" value="{{ id_persona }}">
+
+    <label for="campo">Cosa vuoi modificare?</label>
+
+    <select id="campo" name="campo">
+        <option value="nome">Nome</option>
+        <option value="eta">Età</option>
+        <option value="residenza">Residenza</option>
+        <option value="professione">Professione</option>
+    </select>
+
+    <button type="submit">Seleziona campo</button>
+
+</form>
+    {% if campo %}
+    <hr>
+
+    <h2>Modifica {{ campo }}</h2>
+
+    <p>
+        Valore attuale:
+        <strong>{{ persona[campo] }}</strong>
+    </p>
+
+<form action="/modifica" method="post">
+
+    <input type="hidden" name="id_persona" value="{{ id_persona }}">
+    <input type="hidden" name="campo" value="{{ campo }}">
+
+    <label for="nuovo_valore">Nuovo valore:</label>
+
+    {% if campo == "eta" %}
+        <input type="number" id="nuovo_valore" name="nuovo_valore"
+               value="{{ persona[campo] }}">
+    {% else %}
+        <input type="text" id="nuovo_valore" name="nuovo_valore"
+               value="{{ persona[campo] }}">
+    {% endif %}
+
+    <button type="submit">Prosegui</button>
+
+</form>
+
+{% if nuovo_valore %}
+    <hr>
+
+    <h2>Riepilogo modifica</h2>
+
+    <p>
+        <strong>{{ campo }}:</strong>
+        {{ persona[campo] }} → {{ nuovo_valore }}
+    </p>
+
+    <form action="/modifica" method="post">
+
+        <input type="hidden" name="conferma" value="si">
+        <input type="hidden" name="id_persona" value="{{ id_persona }}">
+        <input type="hidden" name="campo" value="{{ campo }}">
+        <input type="hidden" name="nuovo_valore" value="{{ nuovo_valore }}">
+
+        <button type="submit">Conferma modifica</button>
+
+    </form>
+{% endif %}
+{% endif %}    
+{% endif %}
+    <hr>
+    <a href="/modifica">Cerca un'altra persona</a>    
+    <p><a href="/">Torna alla home</a></p>
+</body>
+</html>

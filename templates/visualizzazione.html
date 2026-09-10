@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizzazione</title>
+</head>
+<body>
+    <h1>PythonLab - Visualizzazione</h1>
+    <p>Lascia il valore vuoto per visualizzare tutti i record.</p>
+    <form action="/visualizzazione" method="get">
+
+        <label for="campo">Cerca per:</label>
+        <select id="campo" name="campo">
+            <option value="nome">Nome</option>
+            <option value="eta">Età</option>
+            <option value="residenza">Residenza</option>
+            <option value="professione">Professione</option>
+        </select>
+
+        <label for="valore">Valore:</label>
+        <input type="text" id="valore" name="valore">
+
+        <button type="submit">Cerca</button>
+
+    </form>
+
+    {% if messaggio %}
+        <p>{{ messaggio }}</p>
+    {% endif %}
+    
+    {% for id_persona, persona in risultato.items() %}
+        <h2>ID: {{ id_persona }}</h2>
+
+        {% for chiave, valore in persona.items() %}
+            <p><strong>{{ chiave }}:</strong> {{ valore }}</p>
+        {% endfor %}
+    {% endfor %}
+
+    <p><a href="/">Torna alla home</a></p>
+
+</body>
+</html>
